@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        table, th, tr, td{
+            border-collapse: collapse;
+            border: 1px solid #d3d3d3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>@model.title</h1>
+    <p>Welcome to Web Tech @model.title</p>
+    
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+        </tr>
+        @model.courses.forEach(function(course){
+            <tr>
+                <td>@course.courseid</td>
+                <td>
+                    <a href="/Edit/@course.courseid">
+                        @course.title
+                    </a>
+                </td>
+            </tr>
+            })
+    </table>
+
+</body>
+
+</html>
