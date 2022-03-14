@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        table,
+        th,
+        tr,
+        td {
+            border-collapse: collapse;
+            border: 1px solid #808080;
+        }
+    </style>
+    <script type="text/javascript" src="javascripts/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //alert(`Welcome to AJAX`);
+            $.ajax({
+                url: "SPA/xhr-list",
+                method: "GET"
+            }).done(function (res) {
+                //console.log(res)
+                $('#list').html(res)
+            })
+
+            $('body').on('click', 'a.title', function(){
+                //console.log($(this).attr('courseid'));
+                //console.log($(this).parent().prev().text());
+                //console.log($(this).parent().parent().children().eq(0).text());
+
+                var courseid = $(this).attr('courseid');
+            
+            $.ajax({
+                url: "SPA/xhr-edit",
+                method: "GET", 
+                data:{ courseid }
+            }).done(function (res) {
+                console.log(res)
+                //$('#list').html(res)
+            })
+
+
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+    <h1>@model.title</h1>
+    <p>Welcome to @model.title</p>
+
+    <div id="list"></div>
+
+
+
+</body>
+
+</html>
