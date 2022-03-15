@@ -1,0 +1,30 @@
+
+
+    <form action="/Save" method="post">
+        <table>
+            <tr>
+                <th>Id:</th>
+                <td><input type="text" name="courseid" value="@model.course.courseid" readonly></td>
+            </tr>
+            <tr>
+                <th>Code:</th>
+                <td><input type="text" name="code" value="@model.course.code"></td>
+            </tr>
+            <tr>
+                <th>Title:</th>
+                <td><input type="text" name="title" value="@model.course.title" size="30"></td>
+            </tr>
+            <tr>
+                <th>Semester</th>
+                <td><input type="text" name="semester" value="@model.course.semester"></td>
+            </tr>
+            <tr>
+                <th>Credit Hours :</th>
+                <td><input type="text" name="crhr" value="@model.course.crhr"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="Save" id="save"></td>
+            </tr>
+        </table>
+    </form>
+

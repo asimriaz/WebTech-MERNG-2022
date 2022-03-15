@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        table, th, tr, td{
+            border-collapse: collapse;
+            border: 1px solid #808080;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>@model.title</h1>
+    <p>Welcome to @model.title</p>
+    <div>@model.course.courseid</div>
+
+    <form action="/Save" method="post">
+        <table>
+            <tr>
+                <th>Id:</th>
+                <td><input type="text" name="courseid" value="@model.course.courseid" readonly></td>
+            </tr>
+            <tr>
+                <th>Code:</th>
+                <td><input type="text" name="code" value="@model.course.code"></td>
+            </tr>
+            <tr>
+                <th>Title:</th>
+                <td><input type="text" name="title" value="@model.course.title" size="30"></td>
+            </tr>
+            <tr>
+                <th>Semester</th>
+                <td><input type="text" name="semester" value="@model.course.semester"></td>
+            </tr>
+            <tr>
+                <th>Credit Hours :</th>
+                <td><input type="text" name="crhr" value="@model.course.crhr"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Save"></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>

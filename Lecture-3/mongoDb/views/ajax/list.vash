@@ -1,0 +1,17 @@
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+        </tr>
+        @model.courses.forEach(function(course){
+            <tr>
+                <td>@course.courseid</td>
+                <td>
+                    <a href="#!" class="title" courseid="@course.courseid">
+                        @course.title
+                    </a>
+                </td>
+            </tr>
+        })
+    </table>
+

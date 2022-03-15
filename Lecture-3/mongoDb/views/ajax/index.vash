@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        table, th, tr, td{
+            border-collapse: collapse;
+            border: 1px solid #808080;
+        }
+        .col{
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+        }
+    </style>
+    <script type="text/javascript" src="javascript/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //alert(`Welcome to SPA`)
+
+            getCourses();
+
+            $('body').on('click', 'a.title', function(){
+                //alert($(this).parent().prev().text())
+                //alert($(this).parent().parent().children().eq(0).text())
+                var courseid = $(this).attr('courseid');
+                //alert(courseid);
+
+                $.ajax({
+                url:"SPA/xhr-edit", 
+                method: "GET", 
+                data: {courseid}
+            }).done(function(res){
+                //console.log(res)
+                $('#edit').html(res);
+            })                
+
+            })
+
+            $('body').on('click', '#save', function(){
+                var frm = $('form').serialize()
+                console.log(frm)
+
+                $.ajax({
+                    url:"SPA/xhr-save", 
+                    method: "POST", 
+                    data: frm
+                }).done(function(res){
+                    console.log(res)
+                    if(res.modifiedCount === 1){
+                        getCourses();
+                    }
+                    $('#edit').html('');
+                })
+
+            })
+
+        })
+        function getCourses(){
+            $.ajax({
+                url:"SPA/xhr-list", 
+                method: "GET"
+            }).done(function(res){
+                //console.log(res)
+                $('#list').html(res);
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <h1>@model.title</h1>
+    <p>Welcome to @model.title</p>
+    <div id="list" class="col"></div>
+    <div id="edit" class="col"></div>
+
+</body>
+
+</html>
