@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        table, th, tr, td{
+            border-collapse: collapse;
+            border: 1px solid #d3d3d3;
+        }
+        .col{
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+        }
+    </style>
+    <script src="javascript/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            //alert(`Welcome to JQuery`)
+
+            $.ajax({
+                url:"REST/xhr-list", 
+                method: "GET"
+            }).done(function(courses){
+                //console.log(course)
+
+                var markup = `
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                    </tr>
+                    ${courses.map(course => `
+                        <tr>
+                            <td>${course.courseid}</td>
+                            <td>
+                                <a href="#!" class="title" courseid="${course.courseid}">
+                                    ${course.title}
+                                </a>
+                            </td>
+                        </tr>                    
+                    `).join(' ')}
+                </table>
+                `
+                $('#list').html(markup);
+            })  
+
+            $('body').on('click', 'a.title', function(){
+                //alert($(this).parent().prev().text())
+                //alert($(this).parent().parent().children().eq(0).text())
+                //alert($(this).attr('courseid'));
+                var courseid = $(this).attr('courseid');
+
+                $.ajax({
+                    url:"REST/xhr-edit", 
+                    method: "GET", 
+                    data:{ courseid }
+                }).done(function(course){
+                    console.log(course)
+                    $('#edit').show();
+
+                    $('input[name=courseid]').val(course.courseid);
+                    $('input[name=code]').val(course.code);
+                    $('input[name=title]').val(course.title);
+                    $('input[name=semester]').val(course.semester);
+                    $('input[name=crhr]').val(course.crhr);
+
+                    //$('#edit').html(res);
+                })
+            })
+
+            $('body').on('click', '#save', function(){
+                var frm  = $('form').serialize();
+                console.log(frm)
+
+                $.ajax({
+                    url:"SPA/xhr-save", 
+                    method: "POST", 
+                    data: frm
+                }).done(function(res){
+                    console.log(res)
+                    if(res.modifiedCount === 1){
+                        console.log(`done`)
+                        var courseid = $('input[name=courseid]').val();
+                        var title = $('input[name=title]').val();
+
+                        $(`a[courseid=${courseid}]`).text(title);
+                        $('#edit').hide();    
+                    }
+                    
+                })                
+
+            })
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <h1>@model.title</h1>
+    <p>Welcome to Web Tech @model.title</p>
+    
+    <div id="list" class="col"></div>
+    <div id="edit" class="col" style="display: none;">
+
+ 
+
+        <form action="/Save" method="post" >
+            <table>
+                <tr>
+                    <th>Id:</th>
+                    <td><input type="text" name="courseid"  readonly></td>
+                </tr>
+                <tr>
+                    <th>Code:</th>
+                    <td><input type="text" name="code" ></td>
+                </tr>
+                <tr>
+                    <th>Title:</th>
+                    <td><input type="text" name="title" size="30"></td>
+                </tr>
+                <tr>
+                    <th>Semester:</th>
+                    <td><input type="text" name="semester" ></td>
+                </tr>
+                <tr>
+                    <th>Credit Hours:</th>
+                    <td><input type="text" name="crhr" ></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button"  value="Save" id="save"></td>
+                </tr>
+            </table>
+        </form>
+            
+
+    </div>
+
+</body>
+
+</html>
