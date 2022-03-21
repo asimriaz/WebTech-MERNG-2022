@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="javascript/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            //alert(`Welcome to JQuery`)
+            $.ajax({
+                url: "REST/xhr-list", 
+                method: "GET"
+            }).done(function(courses){
+                console.log(courses)
+                const markup = `
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                        </tr>
+                        ${courses.map(course => `
+                            <tr>
+                                <td>${course.courseid}</td>
+                                <td>
+                                    <a href="#!" class="title" courseid="${course.courseid}">
+                                    ${course.title}
+                                    </a>
+                                </td>
+                            </tr>
+                        `).join(' ')}
+                    </table>                
+                `
+                $('#list').html(markup);
+            })
+
+            $('body').on('click', 'a.title', function(){
+                //alert($(this).parent().prev().text());
+                //alert($(this).parent().parent().children().eq(0).text());
+                //alert($(this).attr('courseid'));
+                const courseid = $(this).attr('courseid')
+
+                $.ajax({
+                    url: "REST/xhr-edit", 
+                    method: "GET", 
+                    data: {courseid}
+                }).done(function(res){
+                    //console.log(res)
+                    $('#edit').html(res);
+                })
+
+            })
+
+            $('body').on('click', '#save', function(){
+                const frm = $('form').serialize();
+                console.log(frm)
+
+                $.ajax({
+                    url: "REST/xhr-save", 
+                    method: "POST", 
+                    data: frm
+                }).done(function(res){
+                    console.log(res)
+                    if(res.modifiedCount === 1){
+                        getCourses();
+                        $('#edit').html('');
+                    }
+                })
+
+            })
+
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <h1>@model.title</h1>
+    <div id="list" class="col"></div>
+    <div id="edit" class="col"></div>
+
+</body>
+
+</html>

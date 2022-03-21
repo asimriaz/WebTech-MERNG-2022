@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta>
-    <title>@model.title</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-
-<body>
-    <h1>@model.title</h1>
-    <p>Welcome to @model.title</p>
 
     <table>
         <tr>
@@ -20,13 +8,10 @@
             <tr>
                 <td>@course.courseid</td>
                 <td>
-                    <a href="/Edit/@course.courseid">
+                    <a href="#!" class="title" courseid="@course.courseid">
                         @course.title
                     </a>
                 </td>
             </tr>
         })
     </table>
-</body>
-
-</html>
