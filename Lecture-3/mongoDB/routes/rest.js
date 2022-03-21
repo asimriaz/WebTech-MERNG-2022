@@ -5,25 +5,20 @@ const db = require('../models');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    res.render('ajax/index', { title: "AJAX" });
+    res.render('rest/index', { title: "REST" });
 });
 
 /* GET users listing. */
 router.get('/xhr-list', async function (req, res, next) {
-
     const courses = await db.Course.find().sort({ courseid: 1 });
-    res.render('ajax/list',
-        {
-            title: 'AJAX',
-            courses
-        });
+    res.status(200).json(courses)
 });
 /* GET users listing. */
 router.get('/xhr-edit', async function (req, res, next) {
     console.log(req.query)
     const course = await db.Course.find({ courseid: req.query.courseid });
     console.log(course[0])
-    res.render('ajax/edit', { title: 'AJAX', course: course[0] });
+    res.status(200).json(course[0])
 });
 
 /* GET home page. */

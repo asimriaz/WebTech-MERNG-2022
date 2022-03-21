@@ -2,6 +2,19 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+table,
+th,
+tr,
+td {
+    border-collapse: collapse;
+    border: 1px solid #808080;
+}
+
+.col{
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
 
 a {
   color: #0011ff;

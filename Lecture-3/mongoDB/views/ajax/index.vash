@@ -19,13 +19,7 @@
 
         $(document).ready(function () {
             //alert(`Welcome to AJAX`);
-            $.ajax({
-                url: "SPA/xhr-list",
-                method: "GET"
-            }).done(function (res) {
-                //console.log(res)
-                $('#list').html(res)
-            })
+            getCourses();
 
             $('body').on('click', 'a.title', function(){
                 //console.log($(this).attr('courseid'));
@@ -34,19 +28,47 @@
 
                 var courseid = $(this).attr('courseid');
             
-            $.ajax({
-                url: "SPA/xhr-edit",
-                method: "GET", 
-                data:{ courseid }
-            }).done(function (res) {
-                console.log(res)
-                //$('#list').html(res)
+                $.ajax({
+                    url: "SPA/xhr-edit",
+                    method: "GET", 
+                    data:{ courseid }
+                }).done(function (res) {
+                    //console.log(res)
+                    $('#edit').html(res)
+                })
             })
+
+            $('body').on('click', '#save', function(){
+                const frm  = $('form').serialize()
+                console.log(frm)
+
+                $.ajax({
+                    url: "SPA/xhr-save",
+                    method: "POST", 
+                    data: frm
+                }).done(function (res) {
+                    console.log(res)
+                    if(res.modifiedCount === 1){
+                        getCourses();
+                        $('#edit').html('')
+                    }
+                    
+                })                
 
 
             })
 
         })
+        function getCourses(){
+            $.ajax({
+                url: "SPA/xhr-list",
+                method: "GET"
+            }).done(function (res) {
+                //console.log(res)
+                $('#list').html(res)
+            })
+
+        }
     </script>
 </head>
 
@@ -54,7 +76,8 @@
     <h1>@model.title</h1>
     <p>Welcome to @model.title</p>
 
-    <div id="list"></div>
+    <div id="list" class="col"></div>
+    <div id="edit" class="col"></div>
 
 
 
