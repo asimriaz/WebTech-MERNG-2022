@@ -38,31 +38,9 @@ const db = require('./models');
 //     .then(students => console.log(JSON.stringify(students, null, '\t')))
 
 
-db.Student.aggregate([
-    {
-        $lookup:{
-            from: 'marks', 
-            localField: 'regno', 
-            foreignField: 'regno',
-            as: 'scores'
-        }
-    }, 
-    {
-        $unwind: '$scores'
-    }, 
-    {
-        $group:{
-            _id:{ regno: '$regno', name: '$name' }, 
-            total:{ $sum: '$scores.marks' }
-        }
-    }, 
-    {
-        $project:{
-            _id: 0, 
-            regno: '$_id.regno', 
-            name: '$_id.name', 
-            total: 1
-        }
-    }
-])
-.then(students => console.log(JSON.stringify(students, null, '\t')))
+db.Student.aggregate([ 
+    { $lookup:{ from: 'marks',  localField: 'regno',  foreignField: 'regno', as: 'scores' }},
+    { $unwind: '$scores' },
+    { $group:{ _id:{ regno: '$regno', name: '$name' },total:{ $sum: '$scores.marks' } } },
+    { $project:{ _id: 0,  regno: '$_id.regno',  name: '$_id.name',  total: 1 } }])
+    .then(students => console.log(JSON.stringify(students, null, '\t')))
