@@ -17,6 +17,8 @@
       @model.heads.forEach(function(head){
         <th>@head.headname</th>
       })
+      <th>Total</th>
+      <th>Grade</th>
     </tr>
     <tr>
       <th></th>
@@ -24,17 +26,31 @@
       @model.heads.forEach(function(head){
         <th>@head.total</th>
       })
+      <th>100</th>
+      <th></th>
     </tr>
     @model.students.forEach(function(student){
       <tr>
         <td>@student.name</td>
         <td>@student.regno</td>
         @{
+          var total=0;
           student.scores.sort((a, b) => a.hid - b.hid);
         }
         @student.scores.forEach(function(mark){
           <td>@mark.marks</td>
+          @{ total += mark.marks }
         })
+        <td>@total</td>
+        @{
+          var grade=''
+          model.grades.forEach(function(grd){
+            if(total >= grd.start && total <= grd.end){
+              grade = grd.grade
+            }
+          })
+        }
+        <td>@grade</td>
       </tr>
     })
   </table>
