@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>@model.title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Reg. #</th>
+            @model.heads.forEach(function(head){
+                <th>@head.headname</th>
+            })
+            <th>Total</th>
+            <th>Grade</th>            
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            @model.heads.forEach(function(head){
+                <th>@head.total</th>
+            })
+            <th>100</th>
+            <th></th>
+        </tr>
+
+        @model.students.forEach(function(student){
+            <tr>
+                <td>@student.name</td>
+                <td>@student.regno</td>
+                @{
+                    var total=0;
+                    student.scores.sort((a, b) => a.hid - b.hid);
+
+                }
+                @student.scores.forEach(function(score){
+                    <td>@score.marks</td>
+                    @{ total += score.marks }
+                })
+                <td>@total</td>
+                @{
+                    var grade=''
+                    model.grades.forEach(function(grd){
+                        if( total >= grd.start && total <= grd.end){
+                            grade = grd.grade;
+                        }
+                    })
+                }
+                <td>@grade</td>
+            </tr>
+        })
+    </table>
+
+
+</body>
+
+</html>
