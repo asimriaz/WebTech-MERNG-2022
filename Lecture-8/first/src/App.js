@@ -2,7 +2,8 @@
 import './App.css';
 
 import React from 'react'
-import Header from './components/Header';
+//import Header from './components/Header';
+import Calc from './components/Calc';
 
 // const Body = () => (
 //   <p>
@@ -20,7 +21,8 @@ import Header from './components/Header';
 function App() {
   return (
     <div className="App">
-      <Header message="Welcome to ReactJS"/>
+      {/* <Header message="Welcome to ReactJS"/> */}
+      <Calc />
     </div>
   );
 }
