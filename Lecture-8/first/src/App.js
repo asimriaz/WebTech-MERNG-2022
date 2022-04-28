@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Calc from './components/Calc'
 
 import React, { Component } from 'react'
 
@@ -54,7 +55,8 @@ export class Header extends Component {
 function App() {
     return (
         <div className="App">
-            <Header msg="Welcome to ReactJS"/>
+            {/* <Header msg="Welcome to ReactJS"/> */}
+            <Calc />
         </div>
     );
 }
