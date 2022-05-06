@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import React, { Component } from 'react'
+import Calc from './components/Calc';
 
 export class Header extends Component {
   render(props) {
@@ -52,7 +53,8 @@ const Body = (props) => {
 function App() {
   return (
     <div className="App">
-      <Header msg="Welcome to ReactJS"/>
+      {/* <Header msg="Welcome to ReactJS"/> */}
+      <Calc />
 
     </div>
   );
