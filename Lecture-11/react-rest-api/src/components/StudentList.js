@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import StudentForm from './StudentForm';
-export class StudentList extends Component {
+import StudentForm from './StudentForm'
 
+export class StudentList extends Component {
     state = {
         students: [],
         regno: null
     }
-
     getStudents = async () => {
-        const students = await axios.get(`/api/students`);
-        //console.log(students);
+        const students = await axios.get(`/api/students`)
+        console.log(students);
         this.setState({ students: students.data })
     }
-
     componentDidMount() {
-        this.getStudents();
+        this.getStudents()
     }
 
     handleClick = (regno) => {
-        console.log(regno)
-        this.setState({ regno})
+        //console.log(regno);
+        this.setState({ regno })
+    }
+
+    showUpdated = (std) => {
+        this.setState({ students: this.state.students.map(s => s._id === std._id ? std : s), regno: null })
     }
 
     render() {
@@ -28,7 +30,6 @@ export class StudentList extends Component {
         return (
             <div>
                 <div className="col">
-
                     <table>
                         <thead>
                             <tr>
@@ -51,9 +52,12 @@ export class StudentList extends Component {
                     </table>
                 </div>
                 <div className="col">
-                    {this.state.regno !== null && <StudentForm regno={this.state.regno}/>}
+                    {this.state.regno !== null && (
+                        <StudentForm regno={this.state.regno} showUpdated={this.showUpdated}/>
+                    )}
                 </div>
-            </div>
+
+            </div >
         )
     }
 }

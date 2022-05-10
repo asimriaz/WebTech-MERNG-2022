@@ -1,14 +1,23 @@
-table, th, tr, td{
-    border-collapse: collapse;
-    border: 1px solid #808080;
-  }
-  
-  a:visited{
-    color: blue
-  }
-  
-  .col{
-    display: inline-block;
-    width: 45%;
-    vertical-align: top;
-  }
+body {
+	margin: 20px;
+    font: 13px 'Segoe UI';
+}
+
+a:visited {
+	color: blue;
+}
+
+.col {
+	width: 33%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+table,
+th,
+tr,
+td {
+	border-collapse: collapse;
+	border: 1px solid #d3d3d3;
+    padding-left: 5px;
+}
