@@ -1,0 +1,14 @@
+GET http://localhost:5000/api/students HTTP/1.1
+###
+GET http://localhost:5000/api/students/1712239 HTTP/1.1
+
+###
+
+PATCH http://localhost:5000/api/students/update
+Content-Type: application/json
+
+{
+    "_id":"6274af982c4ef5fdd6ad3a80",
+    "regno":"1712219",
+    "name":"Ajay Kumar AK"
+}
