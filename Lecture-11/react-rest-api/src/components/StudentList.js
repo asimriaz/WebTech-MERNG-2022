@@ -1,34 +1,40 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import StudentForm from './StudentForm';
 
-
 export class StudentList extends Component {
-    state = {
-        regno: null,
-        students: []
-    }
-    getStudents = async () => {
-        const students = await axios.get(`/api/students`);
-        //console.log(students)
-        this.setState({ students: students.data })
 
+    state = {
+        students: [],
+        regno: null
+    }
+
+
+    getStudents = async () => {
+        const students = await axios(`/api/students`);
+        //console.log(students);
+        this.setState({ students: students.data })
     }
 
     componentDidMount() {
-        this.getStudents()
+        this.getStudents();
     }
 
     handleClick = (regno) => {
-        //console.log(regno)
+        console.log(regno)
         this.setState({ regno })
     }
 
+    showUpdated = (std) => {
+        this.setState({ students: this.state.students.map(s => s._id === std._id ? std : s) })
+    }
+
     render() {
+        let url = '#'
         return (
-            this.state.students.length !== 0 &&
-            <Fragment>
+            <div>
                 <div className="col">
+
                     <table>
                         <thead>
                             <tr>
@@ -41,7 +47,7 @@ export class StudentList extends Component {
                                 <tr key={std._id}>
                                     <td>{std.regno}</td>
                                     <td>
-                                        <a href="#" onClick={()=>this.handleClick(std.regno)}>
+                                        <a href={url} onClick={()=> this.handleClick(std.regno)}>
                                             {std.name}
                                         </a>
                                     </td>
@@ -51,10 +57,11 @@ export class StudentList extends Component {
                     </table>
                 </div>
                 <div className="col">
-                    {this.state.regno !== null && <StudentForm regno={this.state.regno}/>}
+                    {this.state.regno !== null && (
+                        <StudentForm regno={this.state.regno} showUpdated={this.showUpdated}/>
+                    )}
                 </div>
-                <pre style={{textAlign: 'left'}}>{JSON.stringify(this.state, null, 2)}</pre>
-            </Fragment>
+            </div>
         )
     }
 }

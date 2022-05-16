@@ -1,11 +1,12 @@
-import React from "react";
-import StudentList from "./components/StudentList";
-import "./style.css";
+import './App.css';
+import StudentList from './components/StudentList';
 
-export default function App() {
+function App() {
   return (
     <div>
       <StudentList />
     </div>
   );
 }
+
+export default App;
