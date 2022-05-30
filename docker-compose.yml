@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+    mongodb:
+        container_name: mongo-db
+        image: mongo
+        ports:
+            - "27017:27017"
+
+    seed:
+        image: mongo
+        container_name: seed
+        depends_on:
+            - mongodb
+        volumes:
+            - ./jsondata:/jsondata
+        command:
+            - /bin/bash
+            - -c
+            - |
+                mongoimport --jsonArray --uri "mongodb://mongodb:27017" -d recapsheet -c grades --file /jsondata/grades.json 
+                mongoimport --jsonArray --uri "mongodb://mongodb:27017" -d recapsheet -c marks --file /jsondata/marks.json 
+                mongoimport --jsonArray --uri "mongodb://mongodb:27017" -d recapsheet -c heads --file /jsondata/heads.json
+                mongoimport --jsonArray --uri "mongodb://mongodb:27017" -d recapsheet -c students --file /jsondata/students.json
+    
+    app:
+        image: node:16
+        container_name: recapsheet
+        working_dir: /usr/src/app
+        volumes:
+            - ./app:/usr/src/app
+        command: bash -c "npm install && npm run dev"
+        restart: unless-stopped
+        ports:
+            - 3000:3000
+            - 5000:5000
+        depends_on:
+            - mongodb
+        environment:
+            - DB_HOST=mongodb
+            - DB_NAME=recapsheet
+            - WATCHPACK_POLLING=true 
+        stdin_open: true
+        tty: true

@@ -1,0 +1,20 @@
+GET http://localhost:5000/api/students HTTP/1.1
+
+###
+GET http://localhost:5000/api/students/all HTTP/1.1
+
+
+###
+
+GET http://localhost:5000/api/students/1712228 HTTP/1.1
+
+###
+
+PATCH  http://localhost:5000/api/students/update HTTP/1.1
+Content-Type: application/json
+
+{
+  "_id": "62415bc6d5ea611e1f6cd597",
+  "regno": "1712237",
+  "name": "Muhammad Sufyan Rngoonwala EditWala"
+}

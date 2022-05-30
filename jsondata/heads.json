@@ -1,0 +1,42 @@
+[
+	{
+		"hid": 1,
+		"headname": "Quiz 1",
+		"total": 5
+	},
+	{
+		"hid": 2,
+		"headname": "Quiz 2",
+		"total": 5
+	},
+	{
+		"hid": 3,
+		"headname": "Assig. 1",
+		"total": 5
+	},
+	{
+		"hid": 4,
+		"headname": "Assig. 2",
+		"total": 5
+	},
+	{
+		"hid": 5,
+		"headname": "Final 1",
+		"total": 35
+	},
+	{
+		"hid": 6,
+		"headname": "Mid Term 1",
+		"total": 25
+	},
+	{
+		"hid": 7,
+		"headname": "Project 1",
+		"total": 15
+	},
+	{
+		"hid": 8,
+		"headname": "CP 1",
+		"total": 5
+	}
+]
