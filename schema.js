@@ -11,5 +11,5 @@ const ${modelName}Schema = new Schema({
     ${Object.keys(file[0]).map((k, i) => `${i !== 0?`\n`:``}\t${k}: ${capitalize(typeof file[0][k])},`).join('')}
 });
 
-module.exports = model(${modelName.charAt(0).toUpperCase() + modelName.slice(1)}, ${modelName}Schema);
+module.exports = model('${modelName.charAt(0).toUpperCase() + modelName.slice(1)}', ${modelName}Schema);
 `)
