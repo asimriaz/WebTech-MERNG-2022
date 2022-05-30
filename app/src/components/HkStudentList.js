@@ -42,7 +42,7 @@ const HkStudentList = () => {
                         {students.map(std => (
                             <tr key={std._id}>
                                 <td>{std.regno}</td>
-                                <td>
+                                <td style={{paddingLeft: '5px'}}>
                                     <a href={url} onClick={() => handleClick(std.regno)}>
                                         {std.name}
                                     </a>
