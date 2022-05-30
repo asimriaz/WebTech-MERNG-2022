@@ -4,7 +4,7 @@ Click on ADD NEW INSTANCE on left sidebar
 
 git clone -b docker https://github.com/asimriaz/WebTech-MERNG-2022.git
 
-cd docker-compose-MERN/  
+cd WebTech-MERNG-2022/  
 
 docker-compose up -d
 
