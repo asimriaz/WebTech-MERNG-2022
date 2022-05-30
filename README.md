@@ -2,7 +2,7 @@ Goto [Play With Docker](https://labs.play-with-docker.com/#) and signin with you
 
 Click on ADD NEW INSTANCE on left sidebar
 
-git clone https://github.com/asmryz/docker-compose-MERN.git
+git clone -b docker https://github.com/asimriaz/WebTech-MERNG-2022.git
 
 cd docker-compose-MERN/  
 
