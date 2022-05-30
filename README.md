@@ -8,5 +8,5 @@ cd WebTech-MERNG-2022/
 
 docker-compose up -d
 
-docker exec datasheet bash -c "npm run build"
+docker exec recapsheet bash -c "npm run build"
 
